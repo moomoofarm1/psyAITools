@@ -1,4 +1,4 @@
-This package tries to build AI methods from the machine learning based brain function models (Domigos, 2012;Doya, 2000) and manifold distribution law (Lei et al., 2020). 
+This package tries to build AI methods from the machine learning based brain function models (Domigos, 2012;Doya, 2000) and manifold distribution law (Lei et al., 2020). It plans to contain both object-oriented APIs and functional APIs. But this package is still under development. 
 
 <b>References</b>
 - Domingos, P. (2012). A few useful things to know about machine learning. Communications of the ACM, 55(10), 78-87.
