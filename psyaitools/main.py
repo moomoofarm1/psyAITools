@@ -12,6 +12,7 @@ def getRecDat(path):
     df1 = pd.read_csv(path)
     return df1
 
+# TODO: change column names to numbers.
 def main():
     print("Hello world!")
 
