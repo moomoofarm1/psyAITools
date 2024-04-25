@@ -1,38 +1,57 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import pandas as pd
-from pyspark.sql import SparkSession
+from functional.representation.factDecomMachine import *
+np.random.seed(42)
 
-path =  '../tidyDatMIP_copy.csv'
+# All personality + preEmo
+path1 =  '../../comDat/tabFile.csv'
+path2 =  '../../comDat/CLAPerEm.csv'
+path3 = '../../comDat/preEmoEmbed.csv'
 def getRecDat(path):
     df1 = pd.read_csv(path)
-    df2 = df1.loc[:, "procID":"pDate"]
-    df2["prePANAS"] = df1.loc[:, "pPrePANAS_01_Interested":"pPrePANAS_20_Afraid"].sum(axis=1)
-    df2["postPANAS"] = df1.loc[:, "pPostPANAS_01_Interested":"pPostPANAS_20_Afraid"].sum(axis=1)
-    df1.loc[:, ["pTIPI01", "pTIPI04", "pTIPI06", "pTIPI09"]] = 1 + df1.loc[:, ["pTIPI01", "pTIPI04", "pTIPI06", "pTIPI09"]]
-    df1.loc[:, ["pTIPI04","pTIPI09"]] = 8 - df1.loc[:, ["pTIPI04","pTIPI09"]]
-    df2["extraversion"] = df1.loc[:, ["pTIPI01", "pTIPI06"]].mean(axis=1)
-    df2["emoStability"] = df1.loc[:, ["pTIPI04", "pTIPI09"]].mean(axis=1)
-    return df2
+    return df1
 
 def main():
     print("Hello world!")
 
-    # Initialize SparkSession
-    spark = SparkSession.builder.getOrCreate()
-    # Get the logger
-    logger = spark.sparkContext._jvm.org.apache.log4j
-    # Set default log level to "WARN"
+    spark, logger = getSpark()
     logger.LogManager.getRootLogger().setLevel(logger.Level.WARN)
     
     # start the recommendation
-    df = getRecDat(path)
-    spark_df = spark.createDataFrame(df)
-    spark_df.show()
+    df1 = getRecDat(path1)
+    extTab = [0,2] + [4,5,6,7,8,9]
+    df1 = df1.iloc[:, extTab]
+    df1.columns = ['procID','pPlace', "extraversion", "agreeableness","consciensiousness",
+            "emoStability", "openness",'prePANAS']
+    df1 = df1.sample(frac=1)
+    melted_df1 = pd.melt(df1, id_vars=['procID'], value_vars=['pPlace','extraversion', 'agreeableness', 'consciensiousness', 'emoStability', 'openness', 'prePANAS'], var_name='item', value_name='rating')
+    print(melted_df1.head())
+
+    model = factDecomMachine(melted_df1, numDims=5, backend='spark')
+    print("Model trained!")
+
+    df_CLAPer = getRecDat(path2)
+    col_CLAPer = ['CLA_Dim' + str(i) for i in range(1, df_CLAPer.shape[1]+1)]
+    df_CLAPer.columns = col_CLAPer
+    df_preEmoEmb = getRecDat(path3)
+    col_preEmoEmb = ['preEmoEmb_Dim' + str(i) for i in range(1, df_preEmoEmb.shape[1]+1)]
+    df_preEmoEmb.columns = col_preEmoEmb
+    df2 = pd.concat([df1.loc[:,['procID','pPlace']],df_CLAPer, df_preEmoEmb], axis=1)
+    df2 = df2.sample(frac=1)
+    melted_df2 = pd.melt(df2, id_vars=['procID'], value_vars=['pPlace'] + df_CLAPer.columns.tolist() + df_preEmoEmb.columns.tolist(), 
+                         var_name='item', value_name='rating')
+    print(melted_df2.head())
+    
+    #spark_nonEmb = spark.createDataFrame(df1)
+    #spark_nonEmb.show()
+    #spark_df_emb = spark.createDataFrame(df2)
+    #spark_df_emb.show()
+
 
     print("Goodbye world!")
 
     return 0
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
