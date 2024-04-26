@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import numpy as np
-from functional.IOs.readFiles import *
-from functional.IOs.base64_wav import *
-from functional.representation.xfccs import *
+from .readFiles import *
+from .base64_wav import *
+from ..representation.xfccs import *
 
 def base64_xfccs(path, audioRow, fileName,feature_set="mfcc"):
     dat1 = getRecDat(path)
