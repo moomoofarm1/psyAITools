@@ -1,5 +1,9 @@
 This package tries to build AI methods from the machine learning based brain function models (Domigos, 2012; Doya, 2000) and manifold distribution law (Tenenbaum et al., 2000; Lei et al., 2020). It plans to contain both object-oriented APIs and functional APIs. This package is still under development. Original authors may contact the developer due to license issues.
 
+<b>Planned</b>
+evaluation module: Stevens measurement levels + time + space + inductive/deductive transfer.
+Pipeline: TBD
+
 <b>References</b>
 - Domingos, P. (2012). A few useful things to know about machine learning. Communications of the ACM, 55(10), 78-87.
 - Doya, K. (2000). Complementary roles of basal ganglia and cerebellum in learning and motor control. Current opinion in neurobiology, 10(6), 732-739.
