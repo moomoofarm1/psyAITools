@@ -1,13 +1,20 @@
 [tool.poetry]
 name = "psyaitools"
-version = "0.1.0"
-description = ""
+version = "0.1.6"
+description = "Loudness added."
 authors = ["moomoofarm1 <46774289+moomoofarm1@users.noreply.github.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
 pyspark = "^3.5"
+numpy = "^1.24"
+scipy = "^1.13"
+pandas = "^2.2"
+audioread = "^3.0"
+spafe = "^0.3"
+pyloudnorm = "^0.1"
+peft = "^0.10"
 
 [tool.poetry.extras]
 
