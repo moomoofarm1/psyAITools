@@ -11,4 +11,5 @@ Pipeline: TBD
 - Tenenbaum, J. B., Silva, V. D., & Langford, J. C. (2000). A global geometric framework for nonlinear dimensionality reduction. science, 290(5500), 2319-2323.
 
 Required packages:
-ffmpeg
+- Cpp: ffmpeg
+- Julia: RxInfer.jl 
