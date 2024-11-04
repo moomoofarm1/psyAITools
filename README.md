@@ -12,4 +12,6 @@ Pipeline: TBD
 
 Required packages:
 - Cpp: ffmpeg
+
+Plan to include:
 - Julia: RxInfer.jl 
