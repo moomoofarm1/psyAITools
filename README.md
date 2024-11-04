@@ -1,4 +1,6 @@
-This package tries to build AI methods from the machine learning based brain function models (Domigos, 2012; Doya, 2000) and manifold distribution law (Tenenbaum et al., 2000; Lei et al., 2020), as well as Free Energy Principle / Active Inference (Friston et al., 2016). It plans to contain both object-oriented APIs and functional APIs. This package is still under development. Original authors of packages included may contact the developer due to license issues.
+This package tries to build AI methods from the machine learning based brain function models (Domigos, 2012; Doya, 2000) and manifold distribution law (Tenenbaum et al., 2000; Lei et al., 2020), as well as Free Energy Principle/Active Inference (Friston et al., 2016). It plans to contain both object-oriented APIs and functional APIs. 
+The major function is for audio/speech/language analysis.
+This package is still under development. Original authors of packages included may contact the developer due to license issues.
 
 <b>Planned</b>
 evaluation module: Stevens measurement levels + time + space + inductive/deductive transfer + unsupervised transfer (analogy reasoning) + causal reasoning.
