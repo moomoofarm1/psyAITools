@@ -14,4 +14,5 @@ Required packages:
 - Cpp: ffmpeg
 
 Plan to include:
-- Julia: RxInfer.jl 
+- Julia: RxInfer.jl
+- R (hopefully): bnlearn
